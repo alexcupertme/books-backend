@@ -1,0 +1,43 @@
+version: "3"
+services:
+  app:
+    image: vzlomed/books-backend:latest
+    networks:
+      - app_network
+    restart: unless-stopped
+  redis:
+    image: redis:alpine
+    networks:
+      - app_network
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - data/redis_data:/bitnami/redis/data
+    command:
+      - "redis-server"
+      - "--loglevel ${REDIS_LOGLEVEL:-warning}"
+      - "--save 120 1"
+      - "--maxmemory ${REDIS_MAXMEM:-50mb}"
+      - "--maxmemory-policy ${REDIS_POLICY:-noeviction}"
+      - "--requirepass ${REDIS_PWD}"
+  mongo:
+    image: bitnami/mongodb:latest
+    networks:
+      - app_network
+    restart: unless-stopped
+    environment:
+      MONGODB_ROOT_PASSWORD: ${MONGO_ROOT_PWD}
+      MONGODB_USERNAME: ${MONGO_USER_PROD}
+      MONGODB_PASSWORD: ${MONGO_PWD_PROD}
+      MONGODB_DATABASE: ${MONGO_DB}
+      MONGODB_PORT_NUMBER: ${MONGO_PORT}
+    ports:
+      - "27017:27017"
+    volumes:
+      - data/mongodb_data:/bitnami/mongodb
+networks:
+  app_network:
+volumes:
+  redis_data:
+  mongo:
