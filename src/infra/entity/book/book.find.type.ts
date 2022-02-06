@@ -1,0 +1,20 @@
+export type TFindBook = {
+  offerId?: number;
+  type?: string;
+  available?: boolean;
+  url?: string;
+  price?: number;
+  categoryId?: number;
+  picture?: string;
+  author?: string;
+  name?: string;
+  publisher?: string;
+  series?: string;
+  year?: string;
+  ISBN?: string;
+  genresList?: number[];
+  description?: string;
+  downloadable?: boolean;
+  age?: number;
+  lang?: string;
+};

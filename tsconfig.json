@@ -16,6 +16,13 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@components/*": ["components/*"],
+      "@infra/*": ["infra/*"],
+      "@repository/*": ["infra/repository/*"],
+      "@entity/*": ["infra/entity/*"],
+      "@constant/*": ["constant/*"]
+    }
   }
 }
